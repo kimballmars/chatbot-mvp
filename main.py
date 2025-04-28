@@ -212,7 +212,7 @@ def main():
     st.title("Indiana Legislation Chatbot (MVP)")
 
     # openai.api_key
-    openai.api_key = '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'
+    openai.api_key = ''
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
@@ -274,6 +274,13 @@ def main():
             )
             final_msg = second_response.choices[0].message
             st.session_state["messages"].append({"role": "assistant", "content": final_msg.content})
+
+            #st.write(final_msg.content)
+            # I was thinking about just adding system prompt to ask ai to add source link at the end, turns out not consistent, 
+            # so I change mind and just attached retrieved link at the end of ai's response
+            
+
+            
             # DISPLAY:
             st.markdown(final_msg.content)   # show GPT’s answer
             if function_name == "get_bill_details":
@@ -286,7 +293,7 @@ def main():
 
 
 
-    # Optional: Display the conversation for debugging
+    # For debugging, show every step
     #for i, chat_msg in enumerate(st.session_state["messages"]):
     #    role = chat_msg["role"]
     #    if role == "user":
